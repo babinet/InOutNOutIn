@@ -1,4 +1,4 @@
-# InOut_OutIN
+# InOut_OutIn
 * *Environment : #/bin/bash!*
 * *Requirement : gdal exiftool wget imagemagick*
 
