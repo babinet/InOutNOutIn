@@ -10,7 +10,7 @@ Then
 ```
 sudo ./drush.phar ne-export --format=JSON --file=AllNodes.txt
 ```
-Caracters INTERDITS :
+Caractères INTERDITS ! :
 ```
-" | &
+" | & < >
 ```
