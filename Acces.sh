@@ -30,149 +30,200 @@ cd "$dir" 2>&1 &>/dev/null
 while read -re linecsv
 do
 # NODE INFO + DATA
-NodeTitle=$(echo -e "$linecsv" | awk -F'|' '{print $3}' | sed "s/title' => //g" | sed 's/^"//g' | sed "s/^'//g")
-echo -e "---> \$NodeTitle  ----- ------ ------ ------ ------> $NodeTitle"
-
-#echo -e "$linecsv" | awk -F'|' -v NodeTitle='$NodeTitle' '{print $1, $2, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $21; $22; $23}' OFS='|' | sed "s/'vid' \=> '//g" | sed "s/uid' \=> '//g" | sed "s/title' => //g" | sed 's/^"//g' | sed "s/^'//g" | sed "s/status' => '//g" | sed "s/log' => '//g" | sed "s/comment' => '//g" | sed "s/promote' => '//g" | sed "s/promote' => '//g" | sed "s/sticky' => '//g" | sed "s/nid' => '//g" | sed "s/type' => '//g" | sed "s/language' => '//g" | sed "s/created' => '//g" | sed "s/changed' => '//g" | sed "s/translate' => '//g" | sed "s/revision_timestamp' => '//g" | sed "s/revision_timestamp' => '//g" | sed "s/last_comment_timestamp' => '//g"
-#echo -e "$linecsv" | awk -F'|' '{print $20}' | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}' | awk 'NF' | geomet
-
 substringfields=$(echo "$linecsv" | awk -F'|' '{print $20}' )
-# GEOMERTY
-echo -e "---> \$substringfields  ------ ------ ------ ------> $substringfields"
-substringfieldsGeom=$(echo "$linecsv" | awk -F'|' '{print $20}' | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}' | awk 'NF' | geomet )
-#echo -e "$orange A  $substringfields $white"
-#echo "$linecsv" | awk -F'|' '{print $20}' | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}' | awk 'NF' | geomet
+#echo "$red$substringfields"
+NodeTitle=$(echo -e "$linecsv" | awk -F'|' '{print $3}' | sed "s/title' => //g" | sed 's/^"//g' | sed "s/^'//g" | awk 'FNR == 1' | sed 's/&/et/g')
+echo -e "${white}---> \$NodeTitle               ----- ------ ------ ------ ------> ${orange}$NodeTitle"
+NodeID=$(echo -e "$linecsv" | awk -F'nid'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
+echo -e "${white}---> \$NodeID                  ----- ------ ------ ------ ------> ${orange}"$NodeID""
+NodeVID=$(echo -e "$linecsv" | awk -F'vid'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
+echo -e "${white}---> \$NodeVID                 ----- ------ ------ ------ ------> ${orange}"$NodeVID""
+Vuuid=$(echo -e "$linecsv" | awk -F'vuuid'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
+echo -e "${white}---> \$Vuuid                   ----- ------ ------ ------ ------> ${orange}"$Vuuid""
 
+Date=$(echo -e "$linecsv" | awk -F'created'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
+echo -e "${white}---> \$Date                    ----- ------ ------ ------ ------> ${orange}"$Date""
+RevisionTimestamp=$(echo -e "$linecsv" | awk -F'changed'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
+echo -e "${white}---> \$RevisionTimestamp       ----- ------ ------ ------ ------> ${orange}"$RevisionTimestamp""
+
+# F#cking Date on Mac OS X (Condition)
+System=$(uname)
+if [ "$System" == "Darwin" ]
+then
+echo "Date MAC OS X condition"
+CreatedDatetmp=$(date -r $Date | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
+# KML DATE FORMAT
+CreatedDate=$(date -jf"%a %b %e %H:%M:%S %Y" "$CreatedDatetmp" +"%Y-%m-%dT%H:%M:%S+01:00")
+LastRevisionTimestamptmp=$(date -r $RevisionTimestamp | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
+# KML DATE FORMAT
+LastRevisionTimestamp=$(date -jf"%a %b %e %H:%M:%S %Y" "$LastRevisionTimestamptmp" +"%Y-%m-%dT%H:%M:%S+01:00")
+else
+CreatedDatetmp=$(date -d @$Date | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
+# KML DATE FORMAT
+CreatedDate=$(date -d "$CreatedDatetmp" +"%Y-%m-%dT%H:%M:%S+01:00")
+LastRevisionTimestamptmp=$(date -d @$RevisionTimestamp | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
+# KML DATE FORMAT
+LastRevisionTimestamp=$(date -d "$LastRevisionTimestamptmp" +"%Y-%m-%dT%H:%M:%S+01:00")
+fi
+
+echo -e "${white}---> \$CreatedDate             ----- ------ ------ ------ ------> ${orange}"$CreatedDate""
+echo -e "${white}---> \$LastRevisionTimestamp   ----- ------ ------ ------ ------> ${orange}"$LastRevisionTimestamp""
+substringfieldsGeom=$(echo "$linecsv" | awk -F'|' '{print $20}' | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}' | awk 'NF' | geomet )
+#
 SRSID=$(echo -e "$substringfieldsGeom" | awk -F'\"name\": \"EPSG' '{print $2}' | awk -F''\"'' '{print $1}')
 coordinates3857=$(echo -e "$substringfieldsGeom" | awk -F'coordinates\": ' '{print $2}' | awk -F', \"' '{print $1}' | tr -d '[]' )
-echo -e "---> \$coordinates ---- ------ ------ ------ ------> "$coordinates""
+echo -e "${white}---> \$coordinates3857         ----- ------ ------ ------ ------> ${orange}"$coordinates3857""
 TypeGeom=$(echo -e "$substringfieldsGeom" | awk -F'"srid": ' '{print $2}' | awk -F'\"type\": \"' '{print $2}' | awk -F'\"' '{print $1}')
-echo -e "---> \$TypeGeom  ------ ------ ------ ------ ------> "$TypeGeom""
+echo -e "${white}---> \$TypeGeom                ----- ------ ------ ------ ------> ${orange}"$TypeGeom""
 TypeDacces=$(echo -e "$substringfields" | awk -F'field_type_acces' '{print $2}' | awk -F'tid'\'' => '\''' '{print $2}'| awk -F''\''' '{print $1}' |awk 'NF')
-echo -e "---> \$TypeDacces  ------ ------ ------ ------ ------> "$TypeDacces""
-#'field_type_acces' => array(        'und' => array(          array(            'tid' => '294',
-
-#echo $coordinates3857 coordinates3857
+echo -e "${white}---> \$TypeDacces              ----- ------ ------ ------ ------> ${orange}"$TypeDacces""
+Hauteur=$(echo -e "$substringfields" | awk -F'field_hauteur' '{print $2}' |  awk -F'value'\'' => '\'''  '{print $2}' | awk -F''\'',' '{print $1}' |awk 'NF' | awk '{print $1}')
+echo -e "${white}---> \$Hauteur                 ----- ------ ------ ------ ------> ${purple}"$Hauteur""
+OpenClosed=$(echo -e "$substringfields" | awk -F'field_etat_acces' '{print $2}' |  awk -F'tid'\'' => '\'''  '{print $2}' | awk -F''\'',' '{print $1}' |awk 'NF')
+echo -e "${white}---> \$OpenClosed              ----- ------ ------ ------ ------> ${orange}"$OpenClosed""
 coordinates4326=$(echo "$coordinates3857"| gdaltransform -s_srs EPSG:3857 -t_srs EPSG:4326 | sed 's/\ /\,/g')
+echo -e "${white}---> \$coordinates4326         ----- ------ ------ ------ ------> ${orange}"$coordinates4326""
+body=$(printf "$substringfields" | tr -d '\n'| awk -F'body' '{print $2}' |  awk -F'value'\'' => "'  '{print $2}' | awk -F'",            '\''summary'\'' =>' '{print $1}' | sed 's/<p/\
+<p/'g  | sed 's/<\/p/\
+<\/p/'g | sed 's/<span/\
+<span/'g  | sed 's/<\/span/\
+<\/span/'g| sed 's/<div/\
+<div/'g| sed 's/<br/\
+<br/'g| sed 's/<\/div/\
+<\/div/'g | sed 's/>/>\
+/'g | sed 's/&nbsp;//g' | awk '!/<span/' | awk '!/<\/span/' | awk '!/<p/'| awk '!/<\/p/'| awk '!/<\/div/'| awk '!/<div/' | awk 'NF'|awk '!/^[[:blank:]]*$/')
+#body=$(cat "body.txt"| awk 'NF')
+echo -e "---> \$body  ------ ------ ------ ------ ------> "$body""
 if [[ "$TypeDacces" == 294 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service (PS)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PS.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png")
 echo -e "${white}---> Type d'accès : ${orange}Puits de service (PS)"
 StyleKml="PS"
 fi
 if [[ "$TypeDacces" == 295 ]]
 then
 TypeDaccesABC=$(echo -e "Entrée en cavage (EC)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/EC.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png")
 StyleKml="EC"
 echo -e "${white}---> Type d'accès : ${orange}Entrée en cavage (EC)"
 fi
 if [[ "$TypeDacces" == 296 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier circulaire (ESc)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/ESc.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png")
 StyleKml="ESc"
 echo -e "${white}---> Type d'accès : ${orange}Escalier circulaire (ESc)"
 fi
 if [[ "$TypeDacces" == 297 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier droit (ESd)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/ESd.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png")
 StyleKml="ESd"
 echo -e "${white}---> Type d'accès : ${orange}Escalier droit (ESd)"
 fi
 if [[ "$TypeDacces" == 298 ]]
 then
 TypeDaccesABC=$(echo -e "Galerie technique, autre (GT)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/GT.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png")
 StyleKml="GT"
 echo -e "${white}---> Type d'accès : ${orange}Galerie technique, autre (GT)"
 fi
 if [[ "$TypeDacces" == 299 ]]
 then
 TypeDaccesABC=$(echo -e "Raccordement aux carrières (RC)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/RC.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/RC.png")
 StyleKml="RC"
 echo -e "${white}---> Type d'accès : ${orange}Raccordement aux carrières (RC)"
 fi
 if [[ "$TypeDacces" == 300 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service comblé (PSc)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PSc.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSc.png")
 StyleKml="PSc"
 echo -e "${white}---> Type d'accès : ${orange}Puits de service comblé (PSc)"
 fi
 if [[ "$TypeDacces" == 301 ]]
 then
 TypeDaccesABC=$(echo -e "Lunette (Lte)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h32/lunettes.png")
+IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/50/lunettes.png")
 StyleKml="Lte"
 echo -e "${white}---> Type d'accès : ${orange}Lunette (Lte)"
 fi
 if [[ "$TypeDacces" == 309 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service à échelons (PSé)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PSe.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSe.png")
 StyleKml="PSe"
 echo -e "${white}---> Type d'accès : ${orange}Puits de service à échelons (PSé)"
 fi
 
+####
+# Ouvert/fermé 307 = ouvert 308 = fermé
+if [[ "$OpenClosed" == 307 ]]
+then
+Ouvert=1
+echo -e "${white}---> État : ${orange}Ouvert 1"
+fi
+if [[ "$OpenClosed" == 308 ]]
+then
+Ouvert=0
+echo -e "${white}---> État : ${orange}Fermé (0)"
+fi
+
 echo -e "     <Placemark>
         <name>"$NodeTitle"</name>
-        <styleUrl>\#"$StyleKml"</styleUrl>
+        <styleUrl>#"$StyleKml"</styleUrl>
         <ExtendedData>
-          <SchemaData schemaUrl="#schemaAccess">
-            <SimpleData name="Description">Escalier droit en pierres de tailles. Controlé par l’école du service de santé des armées du Val-de-Grâce / France Domaine</SimpleData>
-            <SimpleData name="Commentaire">Verrouillé en trois points</SimpleData>
-            <SimpleData name="État">0</SimpleData>
-            <SimpleData name="Hauteur">18,9969m</SimpleData>
-            <SimpleData name="Nombre de marches">128</SimpleData>
-            <SimpleData name="Type d’accès">"$TypeDaccesABC"</SimpleData>
+          <SchemaData schemaUrl=\"#schemaAccess\">
+            <SimpleData name=\"Type d’accès\">"$TypeDaccesABC"</SimpleData>
+            <SimpleData name=\"Description\">$body</SimpleData>
+            <SimpleData name=\"Commentaire\"></SimpleData>
+            <SimpleData name=\"Accessible\">$Ouvert</SimpleData>
+            <SimpleData name=\"Hauteur\">$Hauteur m</SimpleData>
+            <SimpleData name=\"Nombre de marches\"></SimpleData>
+            <SimpleData name=\"Date de Création\"><when>$CreatedDate</when></SimpleData>
+            <SimpleData name=\"Dernier Revision\"><when>$LastRevisionTimestamp</when></SimpleData>
+            <SimpleData name=\"NodeID\">$NodeID</SimpleData>
+            <SimpleData name=\"VID\">$NodeVID</SimpleData>
+            <SimpleData name=\"Vuuid\">$Vuuid</SimpleData>
+            <TimeStamp><when></when></TimeStamp>
           </SchemaData>
         </ExtendedData>
         <Point>
-          <coordinates>
-            $coordinates4326
-          </coordinates>
+          <coordinates>$coordinates4326</coordinates>
         </Point>
       </Placemark>" >> AccesTemp.kml
-
-#echo -e "${orange}$NodeTitle|${white} SUBSTRING $substringfields|$purple $TypeDaccesABC | $white $IconAcces $purple $coordinates3857 $red $coordinates4326 HELLO $substringfieldsGeom $white"
 done < NodeAcces.csv
-
-
-
-
-
-
-
 
 echo -e '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
     <Schema id="schemaAccess" name="SchemaAccess">
+      <SimpleField name="Type d’accès" type="string"/>
       <SimpleField name="Description" type="string"/>
       <SimpleField name="pdfmaps_photos" type="string">
         <displayName>Photos</displayName>
       </SimpleField>
       <SimpleField name="Commentaire" type="string"/>
-      <SimpleField name="État" type="bool"/>
+      <SimpleField name="Accessible" type="bool"/>
       <SimpleField name="Hauteur" type="string"/>
       <SimpleField name="Nombre de marches" type="string"/>
       <SimpleField name="Nombre d’échelons" type="string"/>
-      <SimpleField name="Type d’accès" type="string"/>
+      <SimpleField name="NodeID" type="string"/>
+      <SimpleField name="VID" type="string"/>
+      <SimpleField name="Vuuid" type="string"/>
     </Schema>
     <ExtendedData xmlns:avenza="http://www.avenza.com">
-            <avenza:picklist schemaUrl="schemaAccess" avenza:field="Type d’accès">
+     <avenza:picklist schemaUrl="schemaAccess" avenza:field="Type d’accès">
           <avenza:picklistvalue><![CDATA[Escalier Circulaire (ECc)]]></avenza:picklistvalue>
           <avenza:picklistvalue><![CDATA[Escalier Droit (ESd)]]></avenza:picklistvalue>
           <avenza:picklistvalue><![CDATA[Puits de Service (PS)]]></avenza:picklistvalue>
-          <avenza:picklistvalue><![CDATA[Lunette (Lte)]]></avenza:picklistvalue>
-          <avenza:picklistvalue><![CDATA[Galerie Technique, autre (GT)]]></avenza:picklistvalue>
           <avenza:picklistvalue><![CDATA[Puits de Service à Échelons (PSé)]]></avenza:picklistvalue>
+          <avenza:picklistvalue><![CDATA[Galerie Technique, autre (GT)]]></avenza:picklistvalue>
           <avenza:picklistvalue><![CDATA[Entrée en Cavage (EC)]]></avenza:picklistvalue>
           <avenza:picklistvalue><![CDATA[Raccordement aux Carrières (RC)]]></avenza:picklistvalue>
+          <avenza:picklistvalue><![CDATA[Lunette (Lte)]]></avenza:picklistvalue>
       </avenza:picklist>
     </ExtendedData>
     <Folder>
@@ -182,15 +233,16 @@ echo -e '<?xml version="1.0" encoding="UTF-8"?>
         <SchemaData schemaUrl="#schemaAccess"/>
       </ExtendedData>
 ' > Acces.kml
-
-cat AccesTemp.kml >> Acces.kml
+# LOOP END
+cat AccesTemp.kml| awk 'NF' >> Acces.kml
 rm AccesTemp.kml
+
 echo -e '    </Folder>
     <Style id="ESd">
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/ESd.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -198,7 +250,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PS.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -206,7 +258,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PSc.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSc.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -214,7 +266,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/PSe.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSe.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -222,7 +274,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/ESc.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -230,7 +282,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/EC.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -238,7 +290,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/GT.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -246,7 +298,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h32/lunettes.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/Lte.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -254,7 +306,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h32/RC.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -262,18 +314,12 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://carto.sous-paris.com/sites/all/themes/cdm/css/img/h50/logo_white.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/logo_white.png</href>
         </Icon>
       </IconStyle>
     </Style>
-  </Document>
-      <Style id="Vector">
-        <LineStyle>
-        <color>ff0099ff</color>
-        <width>4</width>
-      </LineStyle>
-      <PolyStyle>
-        <color>7f0099ff</color>
-      </PolyStyle>
-      <\style>
+</Document>
 </kml>' >> Acces.kml
+
+
+cd -
