@@ -1,6 +1,6 @@
 # InOut_OutIn
 * *Environment : #/bin/bash!*
-* *Requirement : gdal exiftool wget imagemagick*
+* *Requirement : gdal exiftool wget imagemagick geopy geomet*
 
 Output settings:
 
