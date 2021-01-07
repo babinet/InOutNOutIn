@@ -173,7 +173,7 @@ echo -e '    </Folder>
     </Style>
 </Document>
 </kml>' >> Parcours.kml
-
+gpsbabel -w -i kml -f Parcours.kml -o gpx -F Parcours.gpx
 
 cd -
 
