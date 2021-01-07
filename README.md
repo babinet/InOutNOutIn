@@ -1,6 +1,6 @@
 # InOut_OutIn
 * *Environment : #/bin/bash!*
-* *Requirement : gdal imagemagick geomet*
+* *Requirement : gdal imagemagick geomet gpsbabel*
 
 Output settings:
 
