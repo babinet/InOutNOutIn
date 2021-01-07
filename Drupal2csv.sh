@@ -27,6 +27,8 @@ dir=$(
 cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 cd "$dir" 2>&1 &>/dev/null
+#sudo apt install python-pip
+#sudo pip install geomet
 #Extraction from drush (drush 8)
 #sudo ./drush.phar ne-export --file=AllNodes.txt
 tr -d '\n' < AllNodes.txt | sed -e 's/(object) array(/\
@@ -42,6 +44,11 @@ printf 'vid|uid|title|logs|status|coment|promote|sticky|vuuid|nid|type|language|
 ' > NodeImage.csv
 cat "AllNodesTMP.csv" | awk -F'|' '$11 == "type'\'' => '\''image"' | awk 'NF' >> NodeImage.csv
 
+printf 'vid|uid|title|logs|status|coment|promote|sticky|vuuid|nid|type|language|created|changed|tnid|translate|uuid|revision_timestamp|revision_uid|field_type|last_comment_timestamp|last_comment_name
+' > NodeParcours.csv
+cat "AllNodesTMP.csv" | awk -F'|' '$11 == "type'\'' => '\''ma_descente"' | awk 'NF' >> NodeParcours.csv
 
-./Acces.sh
 
+
+#./Acces.sh
+./Parcours.sh
