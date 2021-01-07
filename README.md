@@ -11,7 +11,7 @@ Then
 sudo ./drush.phar ne-export --format=JSON --file=AllNodes.txt
 ```
 
-Distance parcourue (mètres) : 
+Distance parcourue ellipsoid (mètres) depuis EPSG:27561 vers EPSG:4326 : 
 
 ```
 from osgeo import ogr
@@ -19,7 +19,7 @@ wkt = "LINESTRING (599014.56614022 122720.336597501 0, 599006.884341363 122730.5
 geom = ogr.CreateGeometryFromWkt(wkt)
 print "Length = %d" % geom.Length()
 ```
-Distance parcourue (Toises / Pieds-de-roi) : 
+Distance parcourue ellipsoid (Toises / Pieds-de-roi) conversion : 
 
 Caractères INTERDITS ! :
 ```
