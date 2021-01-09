@@ -27,9 +27,9 @@ Distance parcourue en pied de roi (Charlemagne) utilisé entre 1668 et 1799 d'un
 
 Distance parcourue en pied de roi ancien ou carolingien utilisé avant 1668 d'une longueur de 326,596 mm Toises / Pieds-de-roi / Pouces - conversion :
 
-Caractères INTERDITS KML ! :
+Caractères INTERDITS dans le nom  .kml :
 ```
-" | & < > ★ • ↓ ↑ ← → /\ \/
+" | & < > ★ • ↓ ↑ ← → /\ \/ <- ->
 ```
 
 Awk tid type_de_consolidation
