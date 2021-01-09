@@ -29,9 +29,12 @@ Distance parcourue en pied de roi ancien ou carolingien utilisé avant 1668 d'un
 
 Caractères INTERDITS dans le nom  .kml :
 ```
-" | & < > ★ • ↓ ↑ ← → /\ \/ <- ->
+" | & < > <- ->
 ```
-
+Caractères OK
+```
+★ • ↓ ↑ ← → /\ \/ 
+```
 Awk tid type_de_consolidation
 ```
 cat NodePoi.csv | awk -F'field_type_de_consolidation' '{print $2}' |  awk -F'tid'\'' => '\'''  '{print $2}' | awk -F''\'',' '{print $1}'|awk '!/./ || !seen[$0]++'|awk 'NF'
