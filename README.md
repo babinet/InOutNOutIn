@@ -31,3 +31,8 @@ Caractères INTERDITS ! :
 ```
 " | & < >
 ```
+
+Awk tid type_de_consolidation
+```
+cat NodePoi.csv | awk -F'field_type_de_consolidation' '{print $2}' |  awk -F'tid'\'' => '\'''  '{print $2}' | awk -F''\'',' '{print $1}'|awk '!/./ || !seen[$0]++'|awk 'NF'
+```
