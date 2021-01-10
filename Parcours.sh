@@ -24,10 +24,10 @@ ilghtpurple=`tput setaf 33`
 lightred=`tput setaf 161`
 darkblue=`tput setaf 19`
 dir=$(
-FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
 cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 cd "$dir" 2>&1 &>/dev/null
+FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
 while read -re linecsv
 do
 # NODE INFO + DATA

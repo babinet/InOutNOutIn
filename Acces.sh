@@ -27,6 +27,7 @@ dir=$(
 cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 cd "$dir" 2>&1 &>/dev/null
+FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
 while read -re linecsv
 do
 # NODE INFO + DATA
@@ -242,7 +243,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESd.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -250,7 +251,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PS.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -258,7 +259,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSc.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSc.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -266,7 +267,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSe.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSe.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -274,7 +275,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESc.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -282,7 +283,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/EC.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -290,7 +291,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/GT.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -298,7 +299,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/Lte.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/Lte.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -306,7 +307,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/RC.svg"</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -317,9 +318,7 @@ echo -e '    </Folder>
           <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/logo_white.png</href>
         </Icon>
       </IconStyle>
-    </Style>
-</Document>
-</kml>' >> Acces.kml
+    </Style>' > Acces.kml
 gpsbabel -w -i kml -f Acces.kml -o gpx -F Acces.gpx
 ogr2ogr -f GeoJSON Acces.json Acces.kml
 mv Acces.gpx "$FileDate"_Acces.gpx
