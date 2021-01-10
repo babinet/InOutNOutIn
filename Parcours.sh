@@ -24,6 +24,7 @@ ilghtpurple=`tput setaf 33`
 lightred=`tput setaf 161`
 darkblue=`tput setaf 19`
 dir=$(
+FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
 cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 cd "$dir" 2>&1 &>/dev/null
@@ -174,7 +175,11 @@ echo -e '    </Folder>
 </Document>
 </kml>' >> Parcours.kml
 gpsbabel -w -i kml -f Parcours.kml -o gpx -F Parcours.gpx
-
+ogr2ogr -f GeoJSON Parcours.json Parcours.kml
+mv Parcours.gpx "$FileDate"_Parcours.gpx
+mv Parcours.kml "$FileDate"_Parcours.kml
+mv Parcours.json "$FileDate"_Parcours.json
+zip Parcours.zip *_Parcours.*
 cd -
 
 

@@ -97,63 +97,63 @@ echo -e "---> \$body  ------ ------ ------ ------ ------> "$body""
 if [[ "$TypeDacces" == 294 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service (PS)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PS.svg")
 echo -e "${white}---> Type d'accès : ${orange}Puits de service (PS)"
 StyleKml="PS"
 fi
 if [[ "$TypeDacces" == 295 ]]
 then
 TypeDaccesABC=$(echo -e "Entrée en cavage (EC)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/EC.svg")
 StyleKml="EC"
 echo -e "${white}---> Type d'accès : ${orange}Entrée en cavage (EC)"
 fi
 if [[ "$TypeDacces" == 296 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier circulaire (ESc)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESc.svg")
 StyleKml="ESc"
 echo -e "${white}---> Type d'accès : ${orange}Escalier circulaire (ESc)"
 fi
 if [[ "$TypeDacces" == 297 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier droit (ESd)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESd.svg")
 StyleKml="ESd"
 echo -e "${white}---> Type d'accès : ${orange}Escalier droit (ESd)"
 fi
 if [[ "$TypeDacces" == 298 ]]
 then
 TypeDaccesABC=$(echo -e "Galerie technique, autre (GT)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/GT.svg")
 StyleKml="GT"
 echo -e "${white}---> Type d'accès : ${orange}Galerie technique, autre (GT)"
 fi
 if [[ "$TypeDacces" == 299 ]]
 then
 TypeDaccesABC=$(echo -e "Raccordement aux carrières (RC)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/RC.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/RC.svg")
 StyleKml="RC"
 echo -e "${white}---> Type d'accès : ${orange}Raccordement aux carrières (RC)"
 fi
 if [[ "$TypeDacces" == 300 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service comblé (PSc)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSc.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSc.svg")
 StyleKml="PSc"
 echo -e "${white}---> Type d'accès : ${orange}Puits de service comblé (PSc)"
 fi
 if [[ "$TypeDacces" == 301 ]]
 then
 TypeDaccesABC=$(echo -e "Lunette (Lte)")
-IconAcces=$(echo "https://carto.sous-paris.com/sites/all/themes/cdm/css/img/50/lunettes.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/Lte.svg")
 StyleKml="Lte"
 echo -e "${white}---> Type d'accès : ${orange}Lunette (Lte)"
 fi
 if [[ "$TypeDacces" == 309 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service à échelons (PSé)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSe.png")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSe.svg")
 StyleKml="PSe"
 echo -e "${white}---> Type d'accès : ${orange}Puits de service à échelons (PSé)"
 fi
@@ -242,7 +242,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESd.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -250,7 +250,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PS.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -258,7 +258,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSc.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSc.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -266,7 +266,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PSe.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PSe.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -274,7 +274,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESc.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -282,7 +282,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/EC.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -290,7 +290,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/GT.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -298,7 +298,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/Lte.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/Lte.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -306,7 +306,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/RC.svg"</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -320,6 +320,10 @@ echo -e '    </Folder>
     </Style>
 </Document>
 </kml>' >> Acces.kml
-
-
+gpsbabel -w -i kml -f Acces.kml -o gpx -F Acces.gpx
+ogr2ogr -f GeoJSON Acces.json Acces.kml
+mv Acces.gpx "$FileDate"_Acces.gpx
+mv Acces.kml "$FileDate"_Acces.kml
+mv Acces.json "$FileDate"_Acces.json
+zip Acces.zip *_Acces.*
 cd -
