@@ -104,49 +104,49 @@ echo -e "---> \$body  ------ ------ ------ ------ ------> "$body""
 if [[ "$TypeDePOI" == 311 ]]
 then
 TypeDePOIsABC=$(echo -e "Lieu dit")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/LD.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/LD.png")
 echo -e "${white}---> Type de P.O.I : ${orange}Lieu dit"
 StyleKml="LD"
 fi
 if [[ "$TypeDePOI" == 310 ]]
 then
 TypeDePOIsABC=$(echo -e "Puits à eau")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PE.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PE.png")
 StyleKml="PE"
 echo -e "${white}---> Type de P.O.I : ${orange}Puits à eau"
 fi
 if [[ "$TypeDePOI" == 305 ]]
 then
 TypeDePOIsABC=$(echo -e "Abri")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/A.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/A.png")
 StyleKml="A"
 echo -e "${white}---> Type de P.O.I : ${orange}Abri"
 fi
 if [[ "$TypeDePOI" == 306 ]]
 then
 TypeDePOIsABC=$(echo -e "Curiosité")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/CRs.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/CRs.png")
 StyleKml="CRs"
 echo -e "${white}---> Type de P.O.I : ${orange}Curiosité"
 fi
 if [[ "$TypeDePOI" == 302 ]]
 then
 TypeDePOIsABC=$(echo -e "Inscription premier niveau")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc1.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc1.png")
 StyleKml="ISc1"
 echo -e "${white}---> Type de P.O.I : ${orange}Inscription premier niveau"
 fi
 if [[ "$TypeDePOI" == 303 ]]
 then
 TypeDePOIsABC=$(echo -e "Inscription deuxième niveau")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc2.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc2.png")
 StyleKml="ISc2"
 echo -e "${white}---> Type de P.O.I : ${orange}Inscription deuxième niveau"
 fi
 if [[ "$TypeDePOI" == 304 ]]
 then
 TypeDePOIsABC=$(echo -e "Inscription troisième niveau")
-IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc3.svg")
+IconAPOI=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc3.png")
 StyleKml="ISc3"
 echo -e "${white}---> Type de P.O.I : ${orange}Inscription troisième niveau"
 fi
@@ -278,12 +278,12 @@ if [[ "$TypeDInscription" == 330 ]]; then TypeDInscriptionABC=$(echo -e "Voie");
 
 echo -e "     <Placemark>
         <name>"$NodeTitle"</name>
-        <TimeStamp><when>"$CreatedDate"</when></TimeStamp>
+        <TimeStamp><when>"$LastRevisionTimestamp"</when></TimeStamp>
         <styleUrl>#$StyleKml</styleUrl>
         <ExtendedData>
           <SchemaData schemaUrl=\"#schemPOI\">
             <SimpleData name=\"Type de P.O.I\">"$TypeDePOIsABC"</SimpleData>
-            <SimpleData name=\"Type d’inscription\">"$TypeDInscription"</SimpleData>
+            <SimpleData name=\"Type d’inscription\">"$TypeDInscriptionABC"</SimpleData>
             <SimpleData name=\"Inspecteur / Architecte\">"$Achitecte"</SimpleData>
             <SimpleData name=\"Description\">"$body"</SimpleData>
             <SimpleData name=\"NodeID\">"$Annee"</SimpleData>
@@ -377,7 +377,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc3.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc3.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -385,7 +385,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc2.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc2.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -393,7 +393,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ISc1.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ISc1.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -401,7 +401,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/CRs.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/CRs.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -409,7 +409,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/A.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/A.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -417,7 +417,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PE.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PE.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -425,7 +425,7 @@ echo -e '    </Folder>
       <IconStyle>
         <Icon>
            <scale>10</scale>
-          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/LD.svg</href>
+          <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/LD.png</href>
         </Icon>
       </IconStyle>
     </Style>

@@ -51,7 +51,7 @@ cat "AllNodesTMP.csv" | awk -F'|' '$11 == "type'\'' => '\''ma_descente"' | awk '
 
 
 ./Acces.sh
-./Parcours.sh
-./POI.sh
+#./Parcours.sh
+#./POI.sh
 
 cd -

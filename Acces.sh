@@ -98,42 +98,42 @@ echo -e "---> \$body  ------ ------ ------ ------ ------> "$body""
 if [[ "$TypeDacces" == 294 ]]
 then
 TypeDaccesABC=$(echo -e "Puits de service (PS)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/PS.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/PS.png")
 echo -e "${white}---> Type d'accès : ${orange}Puits de service (PS)"
 StyleKml="PS"
 fi
 if [[ "$TypeDacces" == 295 ]]
 then
 TypeDaccesABC=$(echo -e "Entrée en cavage (EC)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/EC.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/EC.png")
 StyleKml="EC"
 echo -e "${white}---> Type d'accès : ${orange}Entrée en cavage (EC)"
 fi
 if [[ "$TypeDacces" == 296 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier circulaire (ESc)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESc.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESc.png")
 StyleKml="ESc"
 echo -e "${white}---> Type d'accès : ${orange}Escalier circulaire (ESc)"
 fi
 if [[ "$TypeDacces" == 297 ]]
 then
 TypeDaccesABC=$(echo -e "Escalier droit (ESd)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/ESd.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/ESd.png")
 StyleKml="ESd"
 echo -e "${white}---> Type d'accès : ${orange}Escalier droit (ESd)"
 fi
 if [[ "$TypeDacces" == 298 ]]
 then
 TypeDaccesABC=$(echo -e "Galerie technique, autre (GT)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/GT.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/GT.png")
 StyleKml="GT"
 echo -e "${white}---> Type d'accès : ${orange}Galerie technique, autre (GT)"
 fi
 if [[ "$TypeDacces" == 299 ]]
 then
 TypeDaccesABC=$(echo -e "Raccordement aux carrières (RC)")
-IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/SVG/RC.svg")
+IconAcces=$(echo "https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/RC.svg")
 StyleKml="RC"
 echo -e "${white}---> Type d'accès : ${orange}Raccordement aux carrières (RC)"
 fi
@@ -235,7 +235,7 @@ echo -e '<?xml version="1.0" encoding="UTF-8"?>
       </ExtendedData>
 ' > Acces.kml
 # LOOP END
-cat AccesTemp.kml| awk 'NF' >> Acces.kml
+cat AccesTemp.kml| awk 'NF' | awk 'NF' | awk '!/Hauteur"><\/SimpleData>/'| awk '!/Accessible"><\/SimpleData>/'| awk '!/Nombre de marches"><\/SimpleData>/'| awk '!/Commentaire"><\/SimpleData>/'| awk '!/Création"><\/SimpleData>/'| awk '!/NodeID"><\/SimpleData>/'| awk '!/VID"><\/SimpleData>/'| awk '!/Vuuid"><\/SimpleData>/'| awk '!/Description"><\/SimpleData>/' >> Acces.kml
 rm AccesTemp.kml
 
 echo -e '    </Folder>
@@ -318,7 +318,9 @@ echo -e '    </Folder>
           <href>https://raw.githubusercontent.com/babinet/InOutNOutIn/main/Img/logo_white.png</href>
         </Icon>
       </IconStyle>
-    </Style>' > Acces.kml
+    </Style>
+  </Document>
+</kml>' >> Acces.kml
 gpsbabel -w -i kml -f Acces.kml -o gpx -F Acces.gpx
 ogr2ogr -f GeoJSON Acces.json Acces.kml
 mv Acces.gpx "$FileDate"_Acces.gpx
