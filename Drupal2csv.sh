@@ -27,6 +27,26 @@ dir=$(
 cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 cd "$dir" 2>&1 &>/dev/null
+mkdir -p _TRASH_TEMP
+mv 202* _TRASH_TEMP/
+FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
+
+if [ -f AllNodesTMP.csv ]
+then
+rm AllNodesTMP.csv
+fi
+if [ -f Acces.zip ]
+then
+mv Acces.zip _TRASH_TEMP/"$FileDate"_Acces.zip
+fi
+if [ -f P.O.I.zip ]
+then
+mv P.O.I.zip _TRASH_TEMP/"$FileDate"_P.O.I.zip
+fi
+if [ -f Parcours.zip ]
+then
+mv Parcours.zip _TRASH_TEMP/"$FileDate"_Parcours.zip
+fi
 #sudo apt install python-pip
 #sudo pip install geomet
 #Extraction from drush (drush 8)
@@ -51,7 +71,7 @@ cat "AllNodesTMP.csv" | awk -F'|' '$11 == "type'\'' => '\''ma_descente"' | awk '
 
 
 ./Acces.sh
-#./Parcours.sh
-#./POI.sh
+./Parcours.sh
+./POI.sh
 
 cd -
