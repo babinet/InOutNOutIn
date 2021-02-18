@@ -7,9 +7,17 @@ Output settings:
 ![Screenshot](Img/Node_Export.png)
 
 Then
+
 ```
 sudo ./drush.phar ne-export --format=JSON --file=AllNodes.txt
 ```
+
+Or, with spécific content type. Here image
+
+```
+sudo ./drush.phar ne-export --type=image --format=JSON --file=AllImages.txt
+```
+
 
 Distance parcourue ellipsoid (mètres) depuis EPSG:27561 vers EPSG:4326 : 
 
