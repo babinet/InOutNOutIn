@@ -18,6 +18,11 @@ Or, with spécific content type. Here image
 sudo ./drush.phar ne-export --type=image --format=JSON --file=AllImages.txt
 ```
 
+Backtrace
+
+```
+./drush.phar watchdog-show --extended --tail
+```
 
 Distance parcourue ellipsoid (mètres) depuis EPSG:27561 vers EPSG:4326 : 
 
