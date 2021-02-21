@@ -17,6 +17,11 @@ Or, with spécific content type. Here image
 ```
 sudo ./drush.phar ne-export --type=image --format=JSON --file=AllImages.txt
 ```
+Import Images
+
+```
+./drush.phar node-export-import --file=AllImages.tx
+```
 
 Backtrace
 
