@@ -22,6 +22,11 @@ Import Images
 ```
 ./drush.phar node-export-import --file=AllImages.tx
 ```
+Export NodeID
+
+```
+drush node-export-export 45 46 47 --file=filename
+```
 
 Backtrace
 
