@@ -34,6 +34,12 @@ Backtrace
 ./drush.phar watchdog-show --extended --tail
 ```
 
+From PHP :
+
+```
+shell_exec("./drush.phar node-export-export '{$node->nid}' --format=JSON --file=echo.txt");
+```
+
 Distance parcourue ellipsoid (mètres) depuis EPSG:27561 vers EPSG:4326 : 
 
 ```
