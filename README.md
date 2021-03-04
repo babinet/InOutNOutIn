@@ -20,18 +20,18 @@ sudo ./drush.phar ne-export --type=image --format=JSON --file=AllImages.txt
 Import Images
 
 ```
-./drush.phar node-export-import --file=AllImages.tx
+sudo ./drush.phar node-export-import --file=AllImages.tx
 ```
 Export NodeID
 
 ```
-drush node-export-export 45 46 47 --file=filename
+sudo ./drush.phar node-export-export 45 46 47 --file=filename
 ```
 
 Backtrace
 
 ```
-./drush.phar watchdog-show --extended --tail
+sudo ./drush.phar watchdog-show --extended --tail
 ```
 
 From PHP :
