@@ -31,7 +31,7 @@ sudo ./drush.phar node-export-export 45 46 47 --file=filename
 Backtrace
 
 ```
-sudo ./drush.phar watchdog-show --extended --tail
+./drush.phar watchdog-show --extended --tail
 ```
 
 From PHP :
