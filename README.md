@@ -1,6 +1,6 @@
 # InOut_OutIn
 * *Environment : #/bin/bash!*
-* *Requirement : gdal imagemagick geomet gpsbabel bc*
+* *Requirement : gdal imagemagick geomet gpsbabel bc inotify-tools*
 
 Output settings:
 
