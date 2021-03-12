@@ -8,51 +8,63 @@
     use Drupal\field\Entity\FieldConfig;
     use Drupal\field\Entity\FieldStorageConfig;
 
-function generate_parcours_node_postsave($node, $op) {
+//    function generate_parcours_node_save($node){
+//
+//        watchdog('generate_parcours', "the node save hook node save {$node->type} id is {$node->nid} from " . __FUNCTION__);
+//}
+
+    
+    
+
+    
+    function generate_parcours_node_postsave($node, $op) {
+
+//    if (arg(2) == 'add') {
     // Si le content type est ma_descente (Parcours)
     if($node->type == 'ma_descente'){
   watchdog('generate_parcours', "The {$op}d node {$node->type} id is {$node->nid} from " . __FUNCTION__);
+        // On update Supprimer le fichier original
+        $parcours_name = "parcours_{$node->nid}.zip";
+        $uri = 'public://parcours/'. $parcours_name;
         shell_exec("mkdir -p /tmp/parcours/parcours_'{$node->nid}'");
         shell_exec("./drush.phar node-export-export '{$node->nid}' --format=JSON --file=/tmp/parcours/parcours_'{$node->nid}'/AllNodes.txt");
         shell_exec("cp -p sites/all/themes/cdm/bash/parcours_export.sh /tmp/parcours/parcours_'{$node->nid}'/parcours_export.sh");
-        shell_exec("cp -p sites/all/themes/cdm/bash/Model.py /tmp/parcours/parcours_'{$node->nid}'/Model.py; cp -p sites/all/themes/cdm/bash/WaitForZip.sh /tmp/parcours/parcours_'{$node->nid}'/WaitForZip.sh; cd /tmp/parcours/parcours_'{$node->nid}'/; ./WaitForZip.sh; cp -a Parcours.zip /private_files/parcours/parcours_'{$node->nid}'.zip");
-        shell_exec("rm -R /tmp/parcours/parcours_'{$node->nid}'/");
-  
-        $parcours_name = "parcours_{$node->nid}.zip";
-        $uri = 'private://parcours/'. $parcours_name;
-
-        $file = file_save((object) array(
-          'filename' => basename($uri),
-          'uri' => $uri,
-          'status' => FILE_STATUS_PERMANENT,
-          'filemime' => file_get_mimetype($uri),
-        ));
-        }
+        shell_exec("cp -p sites/all/themes/cdm/bash/Model.py /tmp/parcours/parcours_'{$node->nid}'/Model.py");
+        shell_exec("echo '{$node->nid}' > /tmp/parcours/parcours_'{$node->nid}'/NID");
+     }
     }
 
-
-
     /*
-     *  postinsert
+     *          postinsert
      */
-
-    
     function generate_parcours_node_postinsert($node){
         if($node->type == 'ma_descente'){
       watchdog('generate_parcours', "The inserted node {$node->type} id is {$node->nid} from " . __FUNCTION__);
-
- 
-            
-            $thenodeid= $node->nid;
-
+        $thenodeid= $node->nid;
         $parcours_name = "parcours_{$node->nid}.zip";
-        $file_path = "/system/files/parcours/{$parcours_name}";
+        $file_path = "/sites/default/files/parcours/{$parcours_name}";
         $node = node_load("$thenodeid");
-
-     $node->field_linked_files[LANGUAGE_NONE][0]['value'] = "<a href=\"/system/files/parcours/{$parcours_name}\" class=\"btn btn-default btn-dark btn-xs\" ><i class=\"glyphicon glyphicon-download-alt\"></i> Télécharger</a>";
+        $node->field_linked_files[LANGUAGE_NONE][0]['value'] = "/sites/default/files/parcours/{$parcours_name}";
     field_attach_presave('node', $node);
     field_attach_update('node', $node);
-        
-        
     }
+}
+    
+  
+
+    function generate_parcours_node_post_update($node){
+            if($node->type == 'ma_descente'){
+          // your overriding code here
+
+        
+        watchdog('generate_parcours', "the noe_update node hook node update is {$node->type} id is {$node->nid} from " . __FUNCTION__);
+            // On update Supprimer le fichier original
+            $parcours_name = "parcours_{$node->nid}.zip";
+            $uri = 'public://parcours/'. $parcours_name;
+            shell_exec("mkdir -p /tmp/parcours/parcours_'{$node->nid}'");
+            shell_exec("./drush.phar node-export-export '{$node->nid}' --format=JSON --file=/tmp/parcours/parcours_'{$node->nid}'/AllNodes.txt");
+            shell_exec("cp -p sites/all/themes/cdm/bash/parcours_export.sh /tmp/parcours/parcours_'{$node->nid}'/parcours_export.sh");
+            shell_exec("cp -p sites/all/themes/cdm/bash/Model.py /tmp/parcours/parcours_'{$node->nid}'/Model.py");
+            shell_exec("echo '{$node->nid}' > /tmp/parcours/parcours_'{$node->nid}'/NID");
+}
 }
