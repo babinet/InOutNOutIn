@@ -23,19 +23,31 @@ bleuetern=`tput setaf 45`
 ilghtpurple=`tput setaf 33`
 lightred=`tput setaf 161`
 darkblue=`tput setaf 19`
-dir=$(
-cd -P -- "$(dirname -- "$0")" && pwd -P
-)
-cd "$dir" 2>&1 &>/dev/null
+#dir=$(
+#cd -P -- "$(dirname -- "$0")" && pwd -P
+#)
+#cd "$dir" 2>&1 &>/dev/null
 
 
+while [ ! -f NID ]
+do
+    sleep 6
+done
 
+
+if [ -f AllNodesTMP.csv ]
+then rm AllNodesTMP.csv
+fi
 
 
 tr -d '\n' < AllNodes.txt | sed 's/(object) array(/\
 (object) array(/g' | awk '{gsub("'\'',\ \ \ \ \ \ '\''", "|"); print}' | awk '{gsub("\",\ \ \ \ \ \ '\''", "|"); print}'> AllNodesTMP.csv
 
-cat "AllNodesTMP.csv" | awk 'NF' | awk 'FNR == 2 {print}' >> NodeParcours.csv
+if [ -f NodeParcours.csv ]
+then rm NodeParcours.csv
+fi
+
+cat "AllNodesTMP.csv" | awk 'NF' | awk 'FNR == 2 {print}' > NodeParcours.csv
 
 FileDate=$(echo $(date +%Y_%m_%d) | tr "/" "_")
 while read -r linecsv
@@ -49,19 +61,20 @@ Vuuid=$(echo -e "$linecsv" | awk -F'vuuid'\'' => '\''' '{print $2}' | awk -F'|' 
 Date=$(echo -e "$linecsv" | awk -F'created'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
 RevisionTimestamp=$(echo -e "$linecsv" | awk -F'changed'\'' => '\''' '{print $2}' | awk -F'|' '{print $1}' | awk 'NF')
 
-
-
-
 CreatedDatetmp=$(date -d @$Date | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
 # KML DATE FORMAT
 CreatedDate=$(date -d "$CreatedDatetmp" +"%Y-%m-%dT%H:%M:%S+01:00")
 LastRevisionTimestamptmp=$(date -d @$RevisionTimestamp | sed 's/CET //g'| sed 's/UTC //g' | sed 's/CEST //g')
 # KML DATE FORMAT
 LastRevisionTimestamp=$(date -d "$LastRevisionTimestamptmp" +"%Y-%m-%dT%H:%M:%S+01:00")
-
-coordinates4326tmp=$(echo "$linecsv" | awk -F'|' '{print $20}' | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}' | awk 'NF' | /usr/local/bin/geomet)
+coordinates4326tmp=$(echo "$linecsv" | awk -F''\''geometry'\'' => '\''' '{print $2}' | awk -F''\''' '{print $1}'| awk NF | /usr/local/bin/geomet)
 
 WKT27561=$(echo "$coordinates4326tmp" |awk -F']], "crs": {"properties":' '{print $1}' | tr ']' '\n' | tr -d '][' | awk '{print $2, $3","0}' | tr -d '\ ' | tr ',' ' ' |awk '{print $0}' | gdaltransform -s_srs EPSG:4326 -t_srs EPSG:27561 | awk '{print $0","}' |tr '\n' ' '| awk '{print "LINESTRING ("$0")"}' | sed 's/0, )/0)/g' | sed 's/, )/ )/g')
+if [ -f WKT.py ]
+then
+rm WKT.py
+fi
+
 sed "s/STRINGTOREPLACE/'$WKT27561'/g" Model.py | tr -d "'" > WKT.py
 DistanceMetres=$(/usr/bin/python2.7 WKT.py | sed 's/Length = //g')
 DistanceMetresHumanR=$(echo $DistanceMetres | awk -F. '{print $1"."substr($2,1,2)}')
@@ -150,6 +163,20 @@ body=$(printf "$substringfields" | tr -d '\n'| awk -F'body' '{print $2}' |  awk 
 <br/'g| sed 's/<\/div/\
 <\/div/'g | sed 's/>/>\
 /'g | sed 's/&nbsp;//g' | awk '!/<span/' | awk '!/<\/span/' | awk '!/<p/'| awk '!/<\/p/'| awk '!/<\/div/'| awk '!/<div/' | awk 'NF')
+
+
+
+if [ -f ParcoursTemp.kml ]
+then rm ParcoursTemp.kml
+fi
+
+if [ -f Parcours.kml ]
+then rm Parcours.kml
+fi
+
+
+
+
 echo "<Placemark>
         <name>"$NodeTitle"</name>
         <styleUrl>#"$StyleKml"</styleUrl>
@@ -221,12 +248,18 @@ echo '    </Folder>
     </Style>
 </Document>
 </kml>' >> Parcours.kml
-gpsbabel -w -i kml -f Parcours.kml -o gpx -F Parcours.gpx
-ogr2ogr -f GeoJSON Parcours.json Parcours.kml
-mv Parcours.gpx "$FileDate"_Parcours.gpx
-mv Parcours.kml "$FileDate"_Parcours.kml
-mv Parcours.json "$FileDate"_Parcours.json
-zip Parcours.zip *_Parcours.*
+
+ThenodeId=$(cat NID)
 
 
-cd -
+sudo gpsbabel -w -i kml -f Parcours.kml -o gpx -F Parcours.gpx
+sudo ogr2ogr -f GeoJSON Parcours.json Parcours.kml
+sudo mv Parcours.gpx "$FileDate"_Parcours.gpx
+sudo mv Parcours.kml "$FileDate"_Parcours.kml
+sudo mv Parcours.json "$FileDate"_Parcours.json
+sudo zip parcours_"$ThenodeId".zip *_Parcours.*
+sudo mv parcours_"$ThenodeId".zip /var/www/lab/sites/default/files/parcours/
+sudo chown -R www-data:www-data /var/www/lab/sites/default/files/parcours/
+
+
+#rm -R parcours_"$ThenodeId"
