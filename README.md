@@ -58,11 +58,11 @@ Distance parcourue en pied de roi ancien ou carolingien utilisé avant 1668 d'un
 
 Caractères INTERDITS dans le nom  .kml :
 ```
-" | & < > <- ->
+" | & < > <- -> /\ \/ 
 ```
 Caractères OK
 ```
-★ • ↓ ↑ ← → /\ \/ 
+★ • ↓ ↑ ← → 
 ```
 Awk tid type_de_consolidation
 ```
