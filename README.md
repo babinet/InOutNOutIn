@@ -68,3 +68,10 @@ Awk tid type_de_consolidation
 ```
 cat NodePoi.csv | awk -F'field_type_de_consolidation' '{print $2}' |  awk -F'tid'\'' => '\'''  '{print $2}' | awk -F''\'',' '{print $1}'|awk '!/./ || !seen[$0]++'|awk 'NF'
 ```
+
+print a map in a template :
+```
+<?php $map = openlayers_map_load('igc_hd');
+$output = openlayers_render_map($map->data,$map->name);
+print $output; ?>
+```
