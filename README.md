@@ -75,3 +75,11 @@ print a map in a template :
 $output = openlayers_render_map($map->data,$map->name);
 print $output; ?>
 ```
+
+```
+$map = openlayers_map_load('your_map');
+$map->data['layer_activated']['your_layer'] = 'your_layer';
+$map->data['layers']['your_layer'] = 'your_layer';
+$map->data['behaviors']['openlayers_behavior_zoomtolayer']['zoomtolayer']['your_layer'] = 'your_layer';    
+$output = openlayers_render_map($map->data,$map->name);
+```
