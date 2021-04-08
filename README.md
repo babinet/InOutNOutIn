@@ -86,6 +86,7 @@ $output = openlayers_render_map($map->data,$map->name);
 
 
 Movie to gif :
+```
 ffmpeg -i mymovie.mp4 -vf "fps=10,scale=1080:-1:flags=lanczos" -c:v pam -f image2pipe - | convert -delay 10 - -loop 0 -layers optimize MyOutput.gif
-
+```
 
