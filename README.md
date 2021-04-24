@@ -103,3 +103,8 @@ Movie to gif :
 ffmpeg -i mymovie.mp4 -vf "fps=10,scale=1080:-1:flags=lanczos" -c:v pam -f image2pipe - | convert -delay 10 - -loop 0 -layers optimize MyOutput.gif
 ```
 
+Cut image in 4 equale quadrant :
+
+```
+convert image.tif -resize 50% -crop 2x2@ out_%02d.tif
+```
