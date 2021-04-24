@@ -28,6 +28,17 @@ Export NodeID
 sudo ./drush.phar node-export-export 45 46 47 --file=filename
 ```
 
+Export All Taxonomies TID & Names pipe separated
+
+```
+sudo ./drush.phar taxocsv-export all --delimiter="|" tid
+```
+
+Exported :
+```
+taxocsv.csv
+```
+
 Backtrace
 
 ```
