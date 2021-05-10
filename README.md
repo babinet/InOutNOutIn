@@ -108,3 +108,10 @@ Cut image in 4 equale quadrant :
 ```
 convert image.tif -resize 50% -crop 2x2@ out_%02d.tif
 ```
+
+
+Import csv for POIs Images and Access type
+
+```
+./drush feeds-import -y point_dinteret_automatic_update --file=a.csv
+```
