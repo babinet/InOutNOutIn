@@ -115,3 +115,5 @@ Import csv for POIs Images and Access type
 ```
 ./drush feeds-import -y point_dinteret_automatic_update --file=a.csv
 ```
+
+Crantab generator : https://crontab.guru
