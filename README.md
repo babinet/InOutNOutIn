@@ -123,3 +123,11 @@ gdalwarp -dstalpha -srcnodata 0 -co "ALPHA=YES" source.tif dest_RGBA.tif
 ```
 
 Crantab generator : https://crontab.guru
+
+Eexport video timestamp : 
+
+psql -d ladb
+
+```
+COPY movie_timestamps TO '/var/lib/postgresql/Timestamp_export.csv' DELIMITER '|' CSV HEADER;
+```
