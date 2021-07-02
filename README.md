@@ -131,3 +131,10 @@ psql -d ladb
 ```
 COPY movie_timestamps TO '/var/lib/postgresql/Timestamp_export.csv' DELIMITER '|' CSV HEADER;
 ```
+
+
+awk print only if $2 is empty :
+
+```
+awk -F'|' '$2==""'
+```
