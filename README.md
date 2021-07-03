@@ -133,16 +133,27 @@ COPY movie_timestamps TO '/var/lib/postgresql/Timestamp_export.csv' DELIMITER '|
 ```
 
 
+## Procedure to import Nodes with geotags
+1 import taxonomies wia feeds
+Remove duplicate rows befor importing Taxonnomy
+
+```
+cat ___TEST.txt | awk '!seen[$0]++' > ___TEST_NO_DUPES.txt
+``
+
+2 import nodes via feeds
+
 awk print only rows if $2 is empty :
 
 ```
 awk -F'|' '$2==""'
 ```
 
-
-
 awk remove rows if $2 is empty :
 
 ```
 awk -F'|' '$2!=""'
 ```
+
+
+`
