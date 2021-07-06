@@ -156,4 +156,8 @@ awk -F'|' '$2!=""'
 ```
 
 
-`
+geomet WKT export 
+
+```
+geomet --wkt 
+```
