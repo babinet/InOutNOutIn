@@ -134,7 +134,7 @@ COPY movie_timestamps TO '/var/lib/postgresql/Timestamp_export.csv' DELIMITER '|
 
 
 ## Procedure to import Nodes with geotags
-1 import taxonomies wia feeds
+1 import taxonomies via feeds
 Remove duplicate rows befor importing Taxonnomy
 
 ```
