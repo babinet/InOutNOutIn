@@ -155,6 +155,11 @@ awk remove rows if $2 is empty :
 awk -F'|' '$2!=""'
 ```
 
+awk print rows if $1 start by 77  :
+```
+awk '$1 ~ /^ *77/'
+```
+
 
 geomet WKT export 
 
