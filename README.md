@@ -160,6 +160,14 @@ awk print rows if $1 start by 77  :
 awk '$1 ~ /^ *77/'
 ```
 
+awk - split csv and keep headers on ech chunks
+
+```
+awk -v m=10 '
+    (NR==1){h=$0;next}
+    (NR%m==2) { close(f); f=sprintf("%s.%0.5d",FILENAME,++c); print h > f }
+    {print > f}' ACCES.CSV.csv
+```
 
 geomet WKT export 
 
