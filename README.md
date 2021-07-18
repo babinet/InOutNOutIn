@@ -135,7 +135,7 @@ COPY movie_timestamps TO '/var/lib/postgresql/Timestamp_export.csv' DELIMITER '|
 
 ## Procedure to import Nodes with geotags
 1 import taxonomies via feeds
-Remove duplicate rows befor importing Taxonnomy
+Remove duplicate rows before importing Taxonnomy
 
 ```
 cat ___TEST.txt | awk '!seen[$0]++' > ___TEST_NO_DUPES.txt
@@ -160,7 +160,7 @@ awk print rows if $1 start by 77  :
 awk '$1 ~ /^ *77/'
 ```
 
-awk - split csv and keep headers on ech chunks
+awk - split csv and keep headers on each chunks
 
 ```
 awk -v m=10 '
