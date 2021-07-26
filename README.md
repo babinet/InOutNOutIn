@@ -174,3 +174,9 @@ geomet WKT export
 ```
 geomet --wkt 
 ```
+
+Remove exif orientation from image
+
+```
+convert -strip source.jpg dest.jpg
+```
