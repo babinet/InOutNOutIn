@@ -168,6 +168,11 @@ awk -v m=10 '
     (NR%m==2) { close(f); f=sprintf("%s.%0.5d",FILENAME,++c); print h > f }
     {print > f}' ACCES.CSV.csv
 ```
+awk remove remove duplicate rows from two files, but keep one in the dest file
+
+```
+awk 'FNR==NR{a[$1$2]=$0; print} !($1$2 in a) {print}' source1 source2 > output
+```
 
 geomet WKT export 
 
@@ -180,3 +185,4 @@ Remove exif orientation from image
 ```
 convert -strip source.jpg dest.jpg
 ```
+
