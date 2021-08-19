@@ -9,23 +9,23 @@ Output settings:
 Then
 
 ```
-sudo ./drush.phar ne-export --format=JSON --file=AllNodes.txt
+sudo drush ne-export --format=JSON --file=AllNodes.txt
 ```
 
 Or, with spécific content type. Here image
 
 ```
-sudo ./drush.phar ne-export --type=image --format=JSON --file=AllImages.txt
+sudo drush ne-export --type=image --format=JSON --file=AllImages.txt
 ```
 Import Images
 
 ```
-sudo ./drush.phar node-export-import --file=AllImages.tx
+sudo drush node-export-import --file=AllImages.tx
 ```
 Export NodeID
 
 ```
-sudo ./drush.phar node-export-export 45 46 47 --file=filename
+sudo drush node-export-export 45 46 47 --file=filename
 ```
 
 https://www.drupal.org/project/project_module
@@ -33,7 +33,7 @@ https://www.drupal.org/project/project_module
 Export All Taxonomies TID & Names pipe separated
 
 ```
-sudo ./drush.phar taxocsv-export all --delimiter="|" tid
+sudo drush taxocsv-export all --delimiter="|" tid
 ```
 
 Exported :
@@ -44,7 +44,7 @@ taxocsv.csv
 Backtrace
 
 ```
-./drush.phar watchdog-show --extended --tail
+drush watchdog-show --extended --tail
 ```
 
 From PHP :
@@ -52,6 +52,14 @@ From PHP :
 ```
 shell_exec("./drush.phar node-export-export '{$node->nid}' --format=JSON --file=echo.txt");
 ```
+
+Resave all existing terms for a vocabulay name eg. "voie_lieu"
+
+
+```
+drush php-eval '$v = taxonomy_vocabulary_machine_name_load("voie_lieu"); $ts = taxonomy_get_tree($v->vid, 0, NULL, TRUE); foreach ($ts as $t) {taxonomy_term_save($t);}'
+```
+
 
 Distance parcourue ellipsoid (mètres) depuis EPSG:27561 vers EPSG:4326 : 
 
