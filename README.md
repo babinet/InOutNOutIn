@@ -194,3 +194,15 @@ Remove exif orientation from image
 convert -strip source.jpg dest.jpg
 ```
 
+Find duplicate in the collumn 31
+
+```
+awk -F'|' '{print $31}' file
+```
+
+Search variable in $3 and $6
+
+```
+awk -F'|' -v "le_nom_complet"="$Title_Name" '$3=='le_nom_complet'' Cleaned_db/title.basics_movie.csv | awk -F'|' -v "year"="$Year" '$6=='year'' > ../.Temp.film
+```
+
