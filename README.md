@@ -226,3 +226,12 @@ Export WFS Assemblage and get NID
 sudo ./drush.phar ne-export --type=planche_wfs --file=WFS_Assemb.txt
 ```
 Then use KonvertExport.sh 
+
+
+
+Disable Globbing and ignore spaces : process line by line in a loop
+
+```
+IFS=$'\n'       # Processing direcoty
+set -f          # disable globbing
+```
