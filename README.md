@@ -220,3 +220,9 @@ NR==1 {
 echo "$begining|Label1|LabeCatalogNumber1|Label2|LabeCatalogNumber2|Label3|LabeCatalogNumber3"
 ```
 
+Export WFS Assemblage and get NID
+
+```
+sudo ./drush.phar ne-export --type=planche_wfs --file=WFS_Assemb.txt
+
+```
