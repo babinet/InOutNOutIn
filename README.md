@@ -224,5 +224,5 @@ Export WFS Assemblage and get NID
 
 ```
 sudo ./drush.phar ne-export --type=planche_wfs --file=WFS_Assemb.txt
-
 ```
+Then use KonvertExport.sh 
