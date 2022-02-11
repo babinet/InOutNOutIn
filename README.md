@@ -235,3 +235,8 @@ Disable Globbing and ignore spaces : process line by line in a loop
 IFS=$'\n'       # Processing direcoty
 set -f          # disable globbing
 ```
+
+Merge geotiff in RGB
+```
+gdal_merge.py-3.8 -init 255 -o test.tif *.tif
+```
