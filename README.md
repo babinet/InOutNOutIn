@@ -249,3 +249,10 @@ HTTP2 SETUP
 ```
 https://gist.github.com/GAS85/38eb5954a27d64ae9ac17d01bfe9898c
 ```
+
+
+#ExifTool 
+Remove Keywords
+```
+exiftool -r -overwrite_original -keywords= 04-41_1977.tif
+```
