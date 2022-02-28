@@ -251,8 +251,23 @@ https://gist.github.com/GAS85/38eb5954a27d64ae9ac17d01bfe9898c
 ```
 
 
-#ExifTool 
+## ExifTool 
 Remove Keywords
 ```
 exiftool -r -overwrite_original -keywords= 04-41_1977.tif
 ```
+Remove Keywords and a some new
+```
+exiftool -r -overwrite_original -keywords= -keywords="new keywords" 04-41_1977.tif
+```
+Add keywords to existing
+```
+exiftool -keywords+="ONE NEW KEYVORD LINE" 04-41_1977.tif
+```
+
+Artist
+```
+exiftool -artist="sous-paris.com"
+```
+
+Sofware
