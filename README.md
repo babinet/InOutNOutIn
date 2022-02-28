@@ -265,8 +265,9 @@ Add keywords to existing
 exiftool -keywords+="ONE NEW KEYVORD LINE" 04-41_1977.tif
 ```
 with option -m unlimited length
+```
 exiftool -m -keywords="ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE" 04-41_1977.tif
-
+```
 Artist
 ```
 exiftool -artist="sous-paris.com"
