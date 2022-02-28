@@ -232,7 +232,7 @@ Then use KonvertExport.sh
 Disable Globbing and ignore spaces : process line by line in a loop
 
 ```
-IFS=$'\n'       # Processing direcoty
+IFS=$'\n'       # Processing direcory
 set -f          # disable globbing
 ```
 
