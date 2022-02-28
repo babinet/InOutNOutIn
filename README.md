@@ -271,3 +271,7 @@ exiftool -artist="sous-paris.com"
 ```
 
 Sofware
+
+```
+exiftool -Software="kta2geo" 04-41_1977.tif
+```
