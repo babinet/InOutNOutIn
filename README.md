@@ -254,19 +254,19 @@ https://gist.github.com/GAS85/38eb5954a27d64ae9ac17d01bfe9898c
 ## ExifTool 
 Remove Keywords
 ```
-exiftool -r -overwrite_original -keywords= 04-41_1977.tif
+exiftool -r -overwrite_original -keywords= 25-50-1988.tif
 ```
 Remove Keywords and a some new
 ```
-exiftool -r -overwrite_original -keywords= -keywords="new keywords" 04-41_1977.tif
+exiftool -r -overwrite_original -keywords= -keywords="new keywords" 25-50-1988.tif
 ```
 Add keywords to existing
 ```
-exiftool -keywords+="ONE NEW KEYVORD LINE" 04-41_1977.tif
+exiftool -keywords+="ONE NEW KEYVORD LINE" 25-50-1988.tif
 ```
 with option -m unlimited length
 ```
-exiftool -m -keywords="ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE" 04-41_1977.tif
+exiftool -m -keywords="ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE ONE NEW KEYVORD Very Very LOOOOONG LINE" 25-50-1988.tif
 ```
 Artist
 ```
@@ -276,5 +276,5 @@ exiftool -artist="sous-paris.com"
 Sofware
 
 ```
-exiftool -Software="kta2geo" 04-41_1977.tif
+exiftool -Software="kta2geo" 25-50-1988.tif
 ```
