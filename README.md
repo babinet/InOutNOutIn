@@ -278,3 +278,10 @@ Sofware
 ```
 exiftool -Software="kta2geo" 25-50-1988.tif
 ```
+## ImageMagick
+convert & resize geotiff with alpha to png with a 200px height and homothetic width
+```
+convert Feuille-300-301_1908.tif[1] -resize x200 Feuille-300-301_1908.png
+```
+
+
