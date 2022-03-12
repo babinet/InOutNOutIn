@@ -223,7 +223,7 @@ echo "$begining|Label1|LabeCatalogNumber1|Label2|LabeCatalogNumber2|Label3|LabeC
 Export WFS Assemblage and get NID
 
 ```
-sudo ./drush ne-export --type=planche_wfs --file=WFS_Assemb.txt
+sudo drush ne-export --type=planche_wfs --file=WFS_Assemblage.txt
 ```
 Then use KonvertExport.sh 
 
