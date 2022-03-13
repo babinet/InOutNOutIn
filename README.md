@@ -278,6 +278,10 @@ Sofware
 ```
 exiftool -Software="kta2geo" 25-50-1988.tif
 ```
+Clear all tags
+```
+exiftool -all= 25-50-1988.tif
+```
 ## ImageMagick
 convert & resize geotiff with alpha to png with a 200px height and homothetic width
 ```
