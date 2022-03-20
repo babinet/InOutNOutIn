@@ -291,3 +291,36 @@ convert ../_Output/"$Lastrender"[1]  -define png:swap-bytes -resize x200 ../_Out
 
 https://www.drupal.org/project/bundle_copy
 
+## Process : Georeference & import
+Georeference from EPSG: 27561 -> GeoTiff
+```
+Kta2Geo/Start_Program.sh
+```
+Then choose menu 2
+- Choose the name of the Geoserver Workspace
+- Choose the hard path where the files will be stored and where apache can read.
+- /var/www/MyVerySpecialPath/WokspaceName/
+- the subfolder will be :
+```
+_Output_3857  _Output_PNG_Preview  _Output_wld_zip
+```
+eg. 
+```
+/var/www/MyVerySpecialPath/WokspaceName/_Output_3857
+/var/www/MyVerySpecialPath/WokspaceName/_Output_PNG_Preview
+/var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip
+```
+Generating :
+1 - GeoTiff EPSG: 3857
+2 - Zip .jpg + .wld + .prj EPSG: 3857
+3 - Png preview convert -resize x200
+3.1 - Wait for upload Geotif, .zip .png to the right place and import from feeds First_import_Planches.csv
+Once upload and import done.
+A - First_import_Planches.csv ( import Geotiff from hard path source to private)
+B - From drupal main folder on the server, run 
+```
+./Export_and_Move_WFS.sh
+```
+3.2 - Continue (Hit enter) to reimport WFS_Assemblage.json WFS_Assemblage.txt on the local machine in Kta2Geo/tmp/
+4 Generating buttons group for each layers.
+
