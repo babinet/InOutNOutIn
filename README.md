@@ -339,7 +339,7 @@ Blah
 7 )Reimport the genrated .json with the node information from drupal main folder on the server, run 
 
 ```
-Inport _Button_import.json
+To inport _Button_import.json do:
 
 drush node-export-import --file=_Button_import.json
 ```
