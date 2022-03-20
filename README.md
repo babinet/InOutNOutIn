@@ -332,3 +332,14 @@ B ) - From drupal main folder on the server, run
 
 4 ) Generating buttons group for each layers.
 
+Blah
+Blah
+Blah
+
+7 )Reimport the genrated .json with the node information from drupal main folder on the server, run 
+
+```
+Inport _Button_import.json
+
+drush node-export-import --file=_Button_import.json
+```
