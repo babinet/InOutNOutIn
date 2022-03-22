@@ -414,12 +414,12 @@ So :
 
 ```
 TheTiffSource="The_Raster_source.tif"
-TheSmallerTiff=$(echo "$TheTiffSource"| sed 's/.tif/_smaller.tif/g' )
+TheSmallerTiffName=$(echo "$TheTiffSource"| sed 's/.tif/_smaller.tif/g' )
 Image_Width=$(exiftool "$TheTiffSource"| awk '/Image Width/'| awk -F': '  '{print $2}' )
 Image_Height=$(exiftool "$TheTiffSource"| awk '/Image Height/'| awk -F': '  '{print $2}' )
 echo Image_Width $Image_Width Image_Height $Image_Height
 half_sizeX=$(echo "$Image_Width"/2|bc -l)
 half_sizeY=$(echo "$Image_Height"/2|bc -l)
 
-gdalwarp -of GTiff -co COMPRESS=DEFLATE -ts $half_sizeX $half_sizeY -r cubic "$TheTiffSource" "$TheSmallerTiff"
+gdalwarp -of GTiff -co COMPRESS=DEFLATE -ts $half_sizeX $half_sizeY -r cubic "$TheTiffSource" "$TheSmallerTiffName"
 ```
