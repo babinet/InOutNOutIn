@@ -404,7 +404,7 @@ drush node-export-import --file=_Button_import.json
 
 ## Gdal Resize Half/Size Big GeoTiff Source
 
-in this exemple the half size is using bc :
+in this exemple the half size with using bc :
 
 ```
 half_sizeX=$(echo "$Image_Width"/2|bc -l)
