@@ -283,6 +283,60 @@ Clear all tags
 exiftool -all= 25-50-1988.tif
 ```
 ## ImageMagick
+
+Changing default parameters
+
+in
+```
+/etc/ImageMagick-6/policy.xml
+```
+From 
+```
+<policymap>
+  <!-- <policy domain="resource" name="temporary-path" value="/tmp"/> -->
+  <policy domain="resource" name="memory" value="256MiB"/>
+  <policy domain="resource" name="map" value="512MiB"/>
+  <policy domain="resource" name="width" value="16KP"/>
+  <policy domain="resource" name="height" value="16KP"/>
+  <policy domain="resource" name="area" value="128MB"/>
+  <policy domain="resource" name="disk" value="1GiB"/>
+  <!-- <policy domain="resource" name="file" value="768"/> -->
+  <!-- <policy domain="resource" name="thread" value="4"/> -->
+  <!-- <policy domain="resource" name="throttle" value="0"/> -->
+  <!-- <policy domain="resource" name="time" value="3600"/> -->
+  <!-- <policy domain="system" name="precision" value="6"/> -->
+  <!-- not needed due to the need to use explicitly by mvg: -->
+  <!-- <policy domain="delegate" rights="none" pattern="MVG" /> -->
+  <!-- use curl -->
+  <policy domain="delegate" rights="none" pattern="URL" />
+  <policy domain="delegate" rights="none" pattern="HTTPS" />
+  <policy domain="delegate" rights="none" pattern="HTTP" />
+  <!-- in order to avoid to get image with password text -->
+  <policy domain="path" rights="none" pattern="@*"/>
+  <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
+  <!-- disable ghostscript format types -->
+  <policy domain="coder" rights="none" pattern="PS" />
+  <policy domain="coder" rights="none" pattern="PS2" />
+  <policy domain="coder" rights="none" pattern="PS3" />
+  <policy domain="coder" rights="none" pattern="EPS" />
+  <policy domain="coder" rights="read|write" pattern="PDF" />
+  <policy domain="coder" rights="none" pattern="XPS" />
+</policymap>
+```
+
+To
+
+```
+  <policy domain="resource" name="memory" value="14GiB"/>
+  <policy domain="resource" name="map" value="30GiB"/>
+  <policy domain="resource" name="width" value="16MP"/>
+  <policy domain="resource" name="height" value="16MP"/>
+  <policy domain="resource" name="area" value="40GP"/>
+  <policy domain="resource" name="disk" value="30GiB"/>
+```
+
+
+
 convert & resize geotiff with alpha to png with a 200px height and homothetic width
 ```
 convert ../_Output/"$Lastrender"[1]  -define png:swap-bytes -resize x200 ../_Output_PNG_Preview/"$NameNoExt"_"$Year".png
