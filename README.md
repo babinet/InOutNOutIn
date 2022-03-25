@@ -358,11 +358,11 @@ Then choose menu 2
 ```
 _Output_3857  _Output_PNG_Preview  _Output_wld_zip
 ```
-eg. 
+eg. (don't forget the taling slash)
 ```
-/var/www/MyVerySpecialPath/WokspaceName/_Output_3857
-/var/www/MyVerySpecialPath/WokspaceName/_Output_PNG_Preview
-/var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip
+/var/www/MyVerySpecialPath/WokspaceName/_Output_3857/
+/var/www/MyVerySpecialPath/WokspaceName/_Output_PNG_Preview/
+/var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip/
 ```
 Generating :
 1 ) - GeoTiff EPSG: 3857
