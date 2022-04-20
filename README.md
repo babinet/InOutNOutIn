@@ -341,7 +341,24 @@ convert & resize geotiff with alpha to png with a 200px height and homothetic wi
 ```
 convert ../_Output/"$Lastrender"[1]  -define png:swap-bytes -resize x200 ../_Output_PNG_Preview/"$NameNoExt"_"$Year".png
 ```
+convert to base64
 
+```
+convert preview.png -resize 400x400 PNG:- | base64
+```
+
+SVG with no background
+
+```
+convert -background none logo_black.svg -resize 40x40 test.png PNG:- | base64
+```
+
+base64 sctructure
+```
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA
+AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot">
+```
 
 https://www.drupal.org/project/bundle_copy
 
