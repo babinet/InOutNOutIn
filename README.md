@@ -422,12 +422,14 @@ drush node-export-import --file=_Button_import.json
 ```
 gdal_rasterize -co "ALPHA=YES" -burn 255 -burn 0 -burn 0 -burn 255 -ot Byte -ts 1000 1000 -l lines lines.shp lines.tif
 ```
-### Give the stroke a width (buffer_lines.shp)
+### Give the stroke a width (from lines.shp buffer_lines.shp)
 
 ```
 ogr2ogr -dialect SQLite -sql "SELECT ST_Buffer(geometry,2.5) FROM lines" buffer_lines.shp lines.shp
 ```
 
+### Gdal convert vector buffer_lines.shp to lines.shp
+ gdal_rasterize -burn 255 -burn 0 -burn 150 -burn 255 -ot Byte -ts 1000 1000 -r bilinear -l buffer_lines buffer_lines.shp work.tif
 ## Gdal Resize Half/Size Big GeoTiff Source
 
 in this exemple the half size with using bc :
