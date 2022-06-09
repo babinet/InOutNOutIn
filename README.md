@@ -382,7 +382,7 @@ eg. (don't forget the taling slash)
 /var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip/
 ```
 Generating :
-1 ) - GeoTiff EPSG: 3857
+1 ) - GeoTiff EPSG: 3857 
 
 2 )- Zip .jpg + .wld + .prj EPSG: 3857
 
@@ -417,7 +417,11 @@ drush node-export-import --file=_Button_import.json
 
 
 
+## Gdal convert vector line in red into raster tif 1000px x 1000px with alpha (band 4 255)
 
+```
+gdal_rasterize -co "ALPHA=YES" -burn 255 -burn 0 -burn 0 -burn 255 -ot Byte -ts 1000 1000 -l lines lines.shp lines.tif
+```
 
 ## Gdal Resize Half/Size Big GeoTiff Source
 
