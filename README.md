@@ -408,20 +408,14 @@ Kta2Geo/Start_Program.sh
 ```
 
 8 ) - Once the process is done back to first shell hit enter to download the allready existing files loaded in the DB
-
-4 ) Generating buttons group for each layers.
-
-Blah
-Blah
-Blah
-
-7 )Reimport the genrated .json with the node information from drupal main folder on the server, run 
-
 ```
-To import _Button_import.json do so:
-
-drush node-export-import --file=_Button_import.json
+---> Hit enter when done!
 ```
+
+9 ) - From drupal import ``` _2IMPORT.CSV ```
+
+
+Done !
 
 
 
