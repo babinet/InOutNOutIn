@@ -367,7 +367,7 @@ Georeference from EPSG: 27561 -> GeoTiff
 ```
 Kta2Geo/Start_Program.sh
 ```
-Then choose menu 2
+Then choose menu 2 GeoRefIGC_And_CSV
 - Choose the name of the Geoserver Workspace
 - Choose the hard path where the files will be stored and where apache can read.
 - /var/www/MyVerySpecialPath/WokspaceName/
