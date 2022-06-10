@@ -382,7 +382,8 @@ eg. (don't forget the taling slash)
 /var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip/
 ```
 Generating :
-1) - List_Special_Planches.csv
+1 ) - List_Special_Planches.csv
+
 1.1 ) - GeoTiff EPSG: 3857 
 
 2 )- Zip .jpg + .wld + .prj EPSG: 3857
@@ -401,11 +402,12 @@ Kta2Geo/Start_Program.sh
 
 6 ) - Validate path in server where the original geotiff, png, and zip are storred (must be readable by apache)
 
-7 ) - Execute command on distant server
+7 ) - With a new shell via ssh, execute command on the distant server
 ```
 ---> On the distant server list existing geottifs : /your/path/List_Geotifs_private_Raw_map.sh
 ```
-3.2 ) - Continue (Hit enter) to reimport WFS_Assemblage.json WFS_Assemblage.txt on the local machine in Kta2Geo/tmp/
+
+8 ) - Once the process is done back to first shell hit enter to download the allready existing files loaded in the DB
 
 4 ) Generating buttons group for each layers.
 
