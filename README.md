@@ -389,16 +389,21 @@ Generating :
 
 3 ) - Png preview convert -resize x200
 
-3.1 ) - Wait for upload Geotif, .zip .png to the right place and import from feeds First_import_Planches.csv
+3.1 ) - Wait for upload Geotif, .zip .png to the right place and hit enter
 
-Once upload and import done.
+Once upload on the server is done.
 
-A ) - First_import_Planches.csv ( import Geotiff from hard path source to private)
-
-B ) - From drupal main folder on the server, run 
-
+4 ) - Run again
 ```
-./Export_and_Move_WFS.sh
+Kta2Geo/Start_Program.sh
+```
+5 ) - Choose menu 3 Update_Layers_in_server
+
+6 ) - Validate path in server where the original geotiff, png, and zip are storred (must be readable by apache)
+
+7 ) - Execute command on distant server
+```
+---> On the distant server list existing geottifs : /your/path/List_Geotifs_private_Raw_map.sh
 ```
 3.2 ) - Continue (Hit enter) to reimport WFS_Assemblage.json WFS_Assemblage.txt on the local machine in Kta2Geo/tmp/
 
