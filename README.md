@@ -382,7 +382,8 @@ eg. (don't forget the taling slash)
 /var/www/MyVerySpecialPath/WokspaceName/_Output_wld_zip/
 ```
 Generating :
-1 ) - GeoTiff EPSG: 3857 
+1) - List_Special_Planches.csv
+1.1 ) - GeoTiff EPSG: 3857 
 
 2 )- Zip .jpg + .wld + .prj EPSG: 3857
 
