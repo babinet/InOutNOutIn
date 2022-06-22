@@ -350,7 +350,7 @@ convert preview.png -resize 400x400 PNG:- | base64
 SVG with no background
 
 ```
-convert -background none logo_black.svg -resize 40x40 test.png PNG:- | base64
+convert -background none logo_black.svg -resize 40x40 PNG:- | base64
 ```
 
 base64 sctructure
