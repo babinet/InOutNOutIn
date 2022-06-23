@@ -347,6 +347,13 @@ convert to base64
 convert preview.png -resize 400x400 PNG:- | base64
 ```
 
+
+### Gdal reder GeoTiff from .tif ans .tfw
+
+```
+gdal_translate -co TFW="YES" source.tif output.geotiff
+```
+
 SVG with no background
 
 ```
