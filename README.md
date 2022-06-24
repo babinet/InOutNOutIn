@@ -437,7 +437,7 @@ gdal_rasterize -co "ALPHA=YES" -burn 255 -burn 0 -burn 0 -burn 255 -ot Byte -ts 
 ogr2ogr -dialect SQLite -sql "SELECT ST_Buffer(geometry,2.5) FROM lines" buffer_lines.shp lines.shp
 ```
 ### Openlayers Layer Bound
-Must be first : left, lower, right, uper
+Must be ordered : left, lower, right, uper
 
 ```
 var mybound = new OpenLayers.Bounds(259498.621, 6246695.025, 259627.735, 6246818.799);
@@ -446,6 +446,9 @@ var mybound = new OpenLayers.Bounds(259498.621, 6246695.025, 259627.735, 6246818
 ```
 var mybound = new OpenLayers.Bounds(left, lower, right, uper);
 ```
+
+
+
 
 ### Gdal convert vector buffer_lines.shp to lines.shp
  gdal_rasterize -burn 255 -burn 0 -burn 150 -burn 255 -ot Byte -ts 1000 1000 -r bilinear -l buffer_lines buffer_lines.shp work.tif
