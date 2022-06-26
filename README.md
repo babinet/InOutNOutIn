@@ -417,12 +417,15 @@ Done !
 ```
 gdalwarp -dstalpha -srcnodata 0 -co "ALPHA=YES" source.tif dest_RGBA.tif
 ```
+
 ##### Cut GeoTiff with a shapefile polygon 
 
 ```
 gdalwarp -cutline crop.shp -crop_to_cutline -dstalpha
 ```
+
 ##### Merge geotiff in RGB
+
 ```
 gdal_merge.py-3.8 -init 255 -o test.tif *.tif
 ```
@@ -436,7 +439,9 @@ PROJCS["WGS_1984_Web_Mercator_Auxiliary_Sphere",GEOGCS["GCS_WGS_1984",DATUM["D_W
 ```
 gdal_rasterize -co "ALPHA=YES" -burn 255 -burn 0 -burn 0 -burn 255 -ot Byte -ts 1000 1000 -l lines lines.shp lines.tif
 ```
+
 ### Give the stroke a width (from lines.shp buffer_lines.shp)
+
 
 ```
 ogr2ogr -dialect SQLite -sql "SELECT ST_Buffer(geometry,2.5) FROM lines" buffer_lines.shp lines.shp
