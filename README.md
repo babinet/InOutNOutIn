@@ -124,11 +124,6 @@ Import csv for POIs Images and Access type
 ./drush feeds-import -y point_dinteret_automatic_update --file=a.csv
 ```
 
-export Geotiff with alpha from no data 0
-
-```
-gdalwarp -dstalpha -srcnodata 0 -co "ALPHA=YES" source.tif dest_RGBA.tif
-```
 
 Crontab generator : https://crontab.guru
 
@@ -228,21 +223,13 @@ sudo drush ne-export --type=planche_wfs --file=WFS_Assemblage.txt
 Then use KonvertExport.sh 
 
 
-
+## Bash
 Disable Globbing and ignore spaces : process line by line in a loop
 
 ```
 IFS=$'\n'       # Processing direcory
 set -f          # disable globbing
 ```
-
-Merge geotiff in RGB
-```
-gdal_merge.py-3.8 -init 255 -o test.tif *.tif
-```
-Def .prj EPSG:3857 / mètre / Meter
-```
-PROJCS["WGS_1984_Web_Mercator_Auxiliary_Sphere",GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Mercator_Auxiliary_Sphere"],PARAMETER["False_Easting",0.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",0.0],PARAMETER["Standard_Parallel_1",0.0],PARAMETER["Auxiliary_Sphere_Type",0.0],UNIT["Meter",1.0]]
 
 ```
 HTTP2 SETUP
@@ -424,6 +411,24 @@ Kta2Geo/Start_Program.sh
 
 Done !
 
+### Gdal
+##### export Geotiff with alpha from no data 0
+
+```
+gdalwarp -dstalpha -srcnodata 0 -co "ALPHA=YES" source.tif dest_RGBA.tif
+```
+##### Cut GeoTiff with a shapefile polygon 
+
+```
+gdalwarp -cutline crop.shp -crop_to_cutline -dstalpha
+```
+##### Merge geotiff in RGB
+```
+gdal_merge.py-3.8 -init 255 -o test.tif *.tif
+```
+Def .prj EPSG:3857 / mètre / Meter
+```
+PROJCS["WGS_1984_Web_Mercator_Auxiliary_Sphere",GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Mercator_Auxiliary_Sphere"],PARAMETER["False_Easting",0.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",0.0],PARAMETER["Standard_Parallel_1",0.0],PARAMETER["Auxiliary_Sphere_Type",0.0],UNIT["Meter",1.0]]
 
 
 ## Gdal convert vector line in red into raster tif 1000px x 1000px with alpha (band 4 255)
@@ -446,9 +451,6 @@ var mybound = new OpenLayers.Bounds(259498.621, 6246695.025, 259627.735, 6246818
 ```
 var mybound = new OpenLayers.Bounds(left, lower, right, uper);
 ```
-
-
-
 
 ### Gdal convert vector buffer_lines.shp to lines.shp
  gdal_rasterize -burn 255 -burn 0 -burn 150 -burn 255 -ot Byte -ts 1000 1000 -r bilinear -l buffer_lines buffer_lines.shp work.tif
