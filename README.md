@@ -421,7 +421,7 @@ gdalwarp -dstalpha -srcnodata 0 -co "ALPHA=YES" source.tif dest_RGBA.tif
 ##### Cut GeoTiff with a shapefile polygon 
 
 ```
-gdalwarp -cutline crop.shp -crop_to_cutline -dstalpha
+gdalwarp -cutline crop.shp -crop_to_cutline -dstalpha source.tif dest.tif
 ```
 
 ##### Merge geotiff in RGB
