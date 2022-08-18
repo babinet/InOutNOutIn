@@ -244,7 +244,7 @@ IFS=$'\n'       # Processing direcory
 set -f          # disable globbing
 ```
 
-```
+
 HTTP2 SETUP
 ```
 https://gist.github.com/GAS85/38eb5954a27d64ae9ac17d01bfe9898c
@@ -291,6 +291,7 @@ in
 /etc/ImageMagick-6/policy.xml
 ```
 From 
+
 ```
 <policymap>
   <!-- <policy domain="resource" name="temporary-path" value="/tmp"/> -->
@@ -338,6 +339,7 @@ To
 
 
 convert & resize geotiff with alpha to png with a 200px height and homothetic width
+
 ```
 convert ../_Output/"$Lastrender"[1]  -define png:swap-bytes -resize x200 ../_Output_PNG_Preview/"$NameNoExt"_"$Year".png
 ```
