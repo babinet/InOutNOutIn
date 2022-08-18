@@ -188,6 +188,7 @@ Remove exif orientation from image
 ```
 convert -strip source.jpg dest.jpg
 ```
+# awk 
 
 Find duplicate in the collumn 31
 
@@ -201,8 +202,8 @@ Search variable in $3 and $6
 awk -F'|' -v "le_nom_complet"="$Title_Name" '$3=='le_nom_complet'' Cleaned_db/title.basics_movie.csv | awk -F'|' -v "year"="$Year" '$6=='year'' > ../.Temp.film
 ```
 
-### awk 
-# print collumn based on header name
+
+### print collumn based on header name
 
 Filename|nodetitle|MapCentroid
 My_file.tif|Mon TitreA|260098.642816645 6247162.50356738
