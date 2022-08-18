@@ -201,18 +201,30 @@ Search variable in $3 and $6
 awk -F'|' -v "le_nom_complet"="$Title_Name" '$3=='le_nom_complet'' Cleaned_db/title.basics_movie.csv | awk -F'|' -v "year"="$Year" '$6=='year'' > ../.Temp.film
 ```
 
-awk print collumn based on header name
+### awk 
+# print collumn based on header name
+
+Filename|nodetitle|MapCentroid
+My_file.tif|Mon TitreA|260098.642816645 6247162.50356738
+My_file2.tif|Mon TitreB|261008.459752008 6246554.12886658
+
+print only column Filename and MapCentroid
 
 ```
-begining=$(awk -F'|' '
+MyCSV=$(echo 'Filename|nodetitle|MapCentroid
+My_file.tif|Mon TitreA|260098.642816645 6247162.50356738
+My_file2.tif|Mon TitreB|261008.459752008 6246554.12886658') 
 
-NR==1 {
-    for (i=1; i<=NF; i++) {
-        f[$i] = i
-    }
-}
-{ print $(f["DiscNumber"]), $(f["traxNumber"]), $(f["Artist"]), $(f["Album_Title"]), $(f["CoverFID"]), $(f["TrackTitle"]), $(f["ALBUMARTIST"]), $(f["DISCTOTAL"]), $(f["TRACKTOTAL"]), $(f["Duration"]), $(f["Audio"]) }' OFS='|' "$theline" | awk '(NR>1)')
-echo "$begining|Label1|LabeCatalogNumber1|Label2|LabeCatalogNumber2|Label3|LabeCatalogNumber3"
+echo "$MyCSV" | awk -F'|' 'NR==1 {for (i=1; i<=NF; i++) {f[$i] = i}}; { print $(f["Filename"]), $(f["MapCentroid"]) }' OFS='|'
+
+```
+
+Output
+
+```
+Filename|MapCentroid
+My_file.tif|260098.642816645 6247162.50356738
+My_file2.tif|261008.459752008 6246554.12886658
 ```
 
 Export WFS Assemblage and get NID
@@ -224,7 +236,7 @@ Then use KonvertExport.sh
 
 
 ## Bash
-Disable Globbing and ignore spaces : process line by line in a loop
+Disable globbing and ignore spaces : process line by line in a loop
 
 ```
 IFS=$'\n'       # Processing direcory
