@@ -205,22 +205,25 @@ awk -F'|' -v "le_nom_complet"="$Title_Name" '$3=='le_nom_complet'' Cleaned_db/ti
 
 ### print collumn based on header name
 
-Filename|nodetitle|MapCentroid
-My_file.tif|Mon TitreA|260098.642816645 6247162.50356738
-My_file2.tif|Mon TitreB|261008.459752008 6246554.12886658
-
+Separator: |
+Output Separator |
+prevent empty cells twice if columns are tagent 
+```
+sed 's/||/THIS_IS_AN_EMPTY_CELL/g'|sed 's/||/THIS_IS_AN_EMPTY_CELL/g'
+```
 print only column Filename and MapCentroid
 
+Sourc :
 ```
 MyCSV=$(echo 'Filename|nodetitle|MapCentroid
 My_file.tif|Mon TitreA|260098.642816645 6247162.50356738
 My_file2.tif|Mon TitreB|261008.459752008 6246554.12886658') 
 
-echo "$MyCSV" | awk -F'|' 'NR==1 {for (i=1; i<=NF; i++) {f[$i] = i}}; { print $(f["Filename"]), $(f["MapCentroid"]) }' OFS='|'
+echo "$MyCSV" | awk -F'|' 'NR==1 {for (i=1; i<=NF; i++) {f[$i] = i}}; { print $(f["Filename"]), $(f["MapCentroid"]) }' OFS='|' |sed 's/THIS_IS_AN_EMPTY_CELL//g' > output.csv
 
 ```
 
-Output
+Output :
 
 ```
 Filename|MapCentroid
