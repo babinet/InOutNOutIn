@@ -288,7 +288,7 @@ exiftool -all= 25-50-1988.tif
 
 
 
-Since ExifTool 12.36 it is possible to directly set Lon Lat EPSG:4326
+Since ExifTool 12.36 it is possible to directly set Lat Lon EPSG:4326 (Notice the order first Lat then Lon)
 
 ```
 exiftool -gpsposition="48.85709456183028, 2.3409128685467" the_file_image.jpg
