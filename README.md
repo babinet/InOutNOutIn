@@ -293,6 +293,15 @@ Since ExifTool 12.36 it is possible to directly set Lat Lon EPSG:4326 (Notice th
 ```
 exiftool -gpsposition="48.85709456183028, 2.3409128685467" the_file_image.jpg
 ```
+But... it is not working for me on .NEF, so I use Lat Lon EPSG:4326
+
+```
+exiftool -GPSLatitude*="48.85709456183028" -GPSLongitude*="2.3409128685467" "$Filename"
+```
+
+```
+exiftool -GPSLatitude*="$GPSPosition4326Lat" -GPSLongitude*="$GPSPosition4326Lon" "$Filename"
+```
 
 ## ImageMagick
 
